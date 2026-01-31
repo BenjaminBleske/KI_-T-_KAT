@@ -1,0 +1,12 @@
+# Der Pfad ist nun relativ zum Speicherort dieser Datei
+path: ./YOLO_Dataset 
+train: images/train
+val: images/val
+
+# Deine Klassen (Anzahl: 4)
+nc: 4
+names:
+  0: rocky_n
+  1: rocky_t
+  2: scratchy_n
+  3: scratchy_t

@@ -1,0 +1,13 @@
+# Alle Datenordner ignorieren, egal wo sie liegen
+**/annotated_previews/
+**/raw_training_data/
+**/Archiv_raw_training_data/
+**/YOLO_Dataset/
+
+# Virtuelle Umgebungen und Modelle
+yolo-env/
+runs/
+
+# System-Dateien
+.DS_Store
+__pycache__/
