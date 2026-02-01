@@ -77,5 +77,5 @@ SOURCE: Die RTSP-Adresse deiner Kamera.
 Ordner | Zweck |
 --|--|
 Training/model_trained_on/raw_trainig_data | Rohdaten (Bilder inkl. Labels) für best.pt |
-Training/yolotraining_folder | Yolo-Training-Folder: Für ein Training muss der Ordner raw_training_data gefüllt werden, der sich in yolotraining_folder befinden muss|
+Training/yolotraining_folder | Yolo-Training-Folder: Für ein Training muss der Ordner raw_training_data gefüllt werden, der sich ebenfalls yolotraining_folder befinden muss|
 
