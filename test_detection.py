@@ -59,7 +59,7 @@ def main():
         # KI-Erkennung von allen Klassen
         # results = model(frame, verbose=False)[0]
         # KI-Erkennung von Scratchy
-        results = model(frame, conf=0.5, classes=[2, 3])
+        results = model(frame, conf=CONF_THRESHOLD, classes=[2, 3], verbose=False)[0]
 
         for box in results.boxes:
             conf = float(box.conf[0])
