@@ -56,8 +56,10 @@ def main():
             print(f"[{time.strftime('%H:%M:%S')}] Info: Scanner läuft stabil...")
             last_heartbeat_time = current_time
 
-        # KI-Erkennung
-        results = model(frame, verbose=False)[0]
+        # KI-Erkennung von allen Klassen
+        # results = model(frame, verbose=False)[0]
+        # KI-Erkennung von Scratchy
+        results = model(frame, conf=0.5, classes=[2, 3])
 
         for box in results.boxes:
             conf = float(box.conf[0])
