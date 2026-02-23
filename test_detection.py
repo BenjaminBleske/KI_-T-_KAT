@@ -8,7 +8,7 @@ from ultralytics import YOLO
 SOURCE = "rtsp://admin:KATZENKI199720192025@192.168.178.150:554/h264Preview_01_sub"
 DIR_PREVIEW = "annotated_previews"
 DIR_TRAINING = "raw_training_data"
-CONF_THRESHOLD = 0.60
+CONF_THRESHOLD = 0.75
 MIN_TIME_BETWEEN_SAVES = 5 
 HEARTBEAT_SECONDS = 10  # Feedback alle 10 Sekunden
 
@@ -57,9 +57,9 @@ def main():
             last_heartbeat_time = current_time
 
         # KI-Erkennung von allen Klassen
-        # results = model(frame, verbose=False)[0]
+        results = model(frame, verbose=False)[0]
         # KI-Erkennung von Scratchy
-        results = model(frame, conf=CONF_THRESHOLD, classes=[2, 3], verbose=False)[0]
+        # results = model(frame, conf=CONF_THRESHOLD, classes=[2, 3], verbose=False)[0]
 
         for box in results.boxes:
             conf = float(box.conf[0])
