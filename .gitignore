@@ -1,12 +1,18 @@
-# Alle Datenordner ignorieren, egal wo sie liegen
+# Datenordner (überall im Projekt)
 **/annotated_previews/
 **/raw_training_data/
 **/Archiv_raw_training_data/
 **/YOLO_Dataset/
+Training/trained/
 
-# Virtuelle Umgebungen und Modelle
+# Virtuelle Umgebungen und YOLO-Logs
 yolo-env/
 runs/
+
+# Große Dateien (Modelle und Backups)
+*.pt
+*.zip
+*.onnx
 
 # System-Dateien
 .DS_Store
