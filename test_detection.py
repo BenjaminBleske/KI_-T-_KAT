@@ -5,10 +5,10 @@ import platform  # Wichtig für die Mac-Erkennung
 from ultralytics import YOLO
 
 # --- KONFIGURATION ---
-SOURCE = "rtsp://admin:KATZENKI199720192025@192.168.178.150:554/h264Preview_01_sub"
+SOURCE = "rtsp://admin:KATZENKI199720192025@192.168.178.150:554/h264Preview_01_main"
 DIR_PREVIEW = "annotated_previews"
 DIR_TRAINING = "raw_training_data"
-CONF_THRESHOLD = 0.75
+CONF_THRESHOLD = 0.80
 MIN_TIME_BETWEEN_SAVES = 5 
 HEARTBEAT_SECONDS = 10  # Feedback alle 10 Sekunden
 

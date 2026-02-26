@@ -31,6 +31,12 @@ Dann kann man das Training mit den untenstehenden Befehlen starten.
 
     yolo train data=data.yaml model=yolov8n.pt epochs=90 imgsz=640 device=mps batch=16 workers=8
 
+    oder ein anderes yolo Modell
+    conda create --name yolo11-env python=3.12 -y
+    conda activate yolo11-env
+    pip install ultralytics
+    yolo train data=data.yaml model=yolo11s.pt epochs=90 imgsz=640 device=mps batch=16 workers=8
+
 # 🚀 Installation & Start (Raspberry Pi 5) test_detection.py
 
 cd ki_skript
