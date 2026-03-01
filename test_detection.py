@@ -13,7 +13,6 @@ MIN_TIME_BETWEEN_SAVES = 5
 HEARTBEAT_SECONDS = 10  # Feedback alle 10 Sekunden
 
 # --- INTELLIGENTER GUI-CHECK ---
-# Aktiviert das Fenster auf Windows, Mac oder Linux mit Monitor (DISPLAY)
 SHOW_GUI = "DISPLAY" in os.environ or os.name == 'nt' or platform.system() == 'Darwin'
 
 # Ordner erstellen
@@ -25,9 +24,10 @@ for folder in [DIR_PREVIEW, DIR_TRAINING]:
 model = YOLO('best.pt')
 last_save_time = {}
 last_heartbeat_time = time.time()
+frame_count = 0  # Counter für FPS-Berechnung hinzugefügt
 
 def main():
-    global last_heartbeat_time
+    global last_heartbeat_time, frame_count
     
     print(f"--- KATZEN-SCANNER STARTET ---")
     print(f"System: {platform.system()} ({platform.machine()})")
@@ -51,15 +51,21 @@ def main():
             cap = cv2.VideoCapture(SOURCE)
             continue
 
-        # --- 10-SEKUNDEN FEEDBACK ---
-        if current_time - last_heartbeat_time >= HEARTBEAT_SECONDS:
-            print(f"[{time.strftime('%H:%M:%S')}] Info: Scanner läuft stabil...")
-            last_heartbeat_time = current_time
+        # Frame zählen
+        frame_count += 1
 
-        # KI-Erkennung von allen Klassen
+        # --- 10-SEKUNDEN FEEDBACK MIT FPS ---
+        if current_time - last_heartbeat_time >= HEARTBEAT_SECONDS:
+            elapsed = current_time - last_heartbeat_time
+            fps = frame_count / elapsed
+            print(f"[{time.strftime('%H:%M:%S')}] Info: Scanner läuft stabil bei {fps:.2f} FPS")
+            
+            # Reset für nächsten Intervall
+            last_heartbeat_time = current_time
+            frame_count = 0
+
+        # KI-Erkennung
         results = model(frame, verbose=False)[0]
-        # KI-Erkennung von Scratchy
-        # results = model(frame, conf=CONF_THRESHOLD, classes=[2, 3], verbose=False)[0]
 
         for box in results.boxes:
             conf = float(box.conf[0])
@@ -101,14 +107,11 @@ def main():
                 print(f" >>> GESPEICHERT: {base_name}")
                 last_save_time[label] = current_time
 
-        # --- GUI ANZEIGE (Nur wenn SHOW_GUI True ist) ---
         if SHOW_GUI:
             cv2.imshow("KI Test-Monitor", frame)
-            # Beenden mit Taste 'q'
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
         else:
-            # CPU-Schonung im Headless-Modus (ca. 10ms Pause)
             time.sleep(0.01)
 
     cap.release()

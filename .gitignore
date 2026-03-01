@@ -10,7 +10,7 @@ yolo-env/
 runs/
 
 # Große Dateien (Modelle und Backups)
-*.pt
+
 *.zip
 *.onnx
 
